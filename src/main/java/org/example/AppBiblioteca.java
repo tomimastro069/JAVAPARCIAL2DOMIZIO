@@ -87,7 +87,7 @@ public class AppBiblioteca extends JFrame {
 
                 // Insertar el usuario en la base de datos
                 try (Connection conn = DataBaseManager.getConnection()) {
-                    DataBaseManager.IngresarUsuario(conn, dni, nombre);
+                    PersonaDAO.IngresarUsuario(conn, dni, nombre);
                 }
 
                 // Obtener los préstamos directamente desde la base de datos
@@ -236,7 +236,7 @@ public class AppBiblioteca extends JFrame {
                     );
                     prestamos.add(nuevo);
 
-                    DataBaseManager.IngresarPrestamo(
+                    PrestamoDAO.IngresarPrestamo(
                             conn,
                             usuario.dni,
                             libroSeleccionado.numero,
@@ -260,6 +260,7 @@ public class AppBiblioteca extends JFrame {
             JOptionPane.showMessageDialog(null, "Error al crear el préstamo: " + e.getMessage());
         }
     }
+
     public void verMisPrestamos() {
         if (prestamos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No tenés préstamos registrados.");
@@ -334,11 +335,22 @@ public class AppBiblioteca extends JFrame {
 
         if (seleccion != null) {
             int numero = Integer.parseInt(seleccion.split(":")[0]);
+
+            // Eliminar préstamo de la base de datos
+            try (Connection conn = DataBaseManager.getConnection()) {
+                PrestamoDAO.eliminarPrestamo(conn, numero);
+            } catch (Exception e) {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Error al eliminar el préstamo de la base de datos.");
+            }
+
+            // Eliminar localmente
             prestamos.removeIf(p -> p.numero == numero);
             prestamosExtendidos.remove(numero);
             JOptionPane.showMessageDialog(null, "Libro devuelto correctamente.");
         }
     }
+
 
     public void accederComoAdmin() {
         int intentos = 0;
@@ -410,9 +422,5 @@ public class AppBiblioteca extends JFrame {
             e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Error al cargar los usuarios.");
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(AppBiblioteca::new);
     }
 }

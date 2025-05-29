@@ -10,7 +10,7 @@ public class Main {
 
             // Crear tablas
             DataBaseManager.createTablaLibros(conn);
-            DataBaseManager.insertarLibros(conn);
+            LibroDAO.insertarLibros(conn);
             DataBaseManager.createTableUsuario(conn);
             DataBaseManager.createTablaPrestamo(conn);
             conn.close();
