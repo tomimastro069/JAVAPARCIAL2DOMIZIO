@@ -81,13 +81,27 @@ public class AppBiblioteca extends JFrame {
 
         btnContinuar.addActionListener(e -> {
             try {
+
                 String nombre = txtNombre.getText().trim();
-                int dni = Integer.parseInt(txtDni.getText().trim());
-                usuario = new Persona(dni, nombre);
+                int id = Integer.parseInt(txtDni.getText().trim());
+                usuario = new Persona(id, nombre);
 
                 // Insertar el usuario en la base de datos
                 try (Connection conn = DataBaseManager.getConnection()) {
-                    PersonaDAO.IngresarUsuario(conn, dni, nombre);
+                    String checkSql = "SELECT 1 FROM Usuario WHERE id = ?";
+                    try (PreparedStatement Stmt = conn.prepareStatement(checkSql)) {
+                        Stmt.setInt(1, id);
+                        ResultSet rs = Stmt.executeQuery();
+                        if (rs.next()) {
+                            JOptionPane.showMessageDialog(ventanaActual, "El DNI ingresado ya está registrado.");
+                            return;
+                        }
+                    }
+                    PersonaDAO.IngresarUsuario(conn, id, nombre);
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(ventanaActual, "Ocurrió un error al ingresar el usuario.");
                 }
 
                 // Obtener los préstamos directamente desde la base de datos
@@ -100,7 +114,7 @@ public class AppBiblioteca extends JFrame {
 
                     prestamos.clear();  // Limpiar cualquier préstamo previo
                     while (rs.next()) {
-                        int id = rs.getInt("id");
+                        int idprestamo = rs.getInt("id");
                         String titulo = rs.getString("titulo_libro");
                         Date fechaSalida = rs.getDate("fecha_salida");
                         Date fechaDevolucion = rs.getDate("fecha_devolucion");
