@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b42a2e43-3843-4958-a28b-a657c7fe0496" name="Changes" comment="ACT FINAL">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/AppBiblioteca.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/AppBiblioteca.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/DataBaseManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/DataBaseManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,16 +53,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Parcial2_Java_Domizio1 [:org.example.AppBiblioteca.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Parcial2_Java_Domizio1 [:org.example.Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/tomim&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Parcial2_Java_Domizio1 [:org.example.AppBiblioteca.main()].executor": "Run",
+    "Gradle.Parcial2_Java_Domizio1 [:org.example.Main.main()].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/tomim/OneDrive/Escritorio/Parcial2_Java_Domizio1"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\tomim\OneDrive\Escritorio\Parcial2_Java_Domizio1\src\main\java\org\example" />
