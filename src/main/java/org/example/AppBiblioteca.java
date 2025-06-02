@@ -97,6 +97,10 @@ public class AppBiblioteca extends JFrame {
                             return;
                         }
                     }
+                    if (nombre.trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(ventanaActual, "El nombre no puede estar vacío.");
+                        return;
+                    }
                     PersonaDAO.IngresarUsuario(conn, id, nombre);
 
                 } catch (Exception ex) {
@@ -112,7 +116,7 @@ public class AppBiblioteca extends JFrame {
                     stmt.setInt(1, usuario.dni);
                     ResultSet rs = stmt.executeQuery();
 
-                    prestamos.clear();  // Limpiar cualquier préstamo previo
+                    prestamos.clear();
                     while (rs.next()) {
                         int idprestamo = rs.getInt("id");
                         String titulo = rs.getString("titulo_libro");
@@ -120,7 +124,7 @@ public class AppBiblioteca extends JFrame {
                         Date fechaDevolucion = rs.getDate("fecha_devolucion");
 
                         Prestamo prestamo = new Prestamo(id, fechaSalida, fechaDevolucion, new Libro(id, titulo), usuario);
-                        prestamos.add(prestamo);
+
                     }
                 }
 

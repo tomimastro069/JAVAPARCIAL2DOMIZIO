@@ -11,7 +11,7 @@ public class PrestamoDAO {
                 "VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement pStmt = conn.prepareStatement(sql)) {
             pStmt.setInt(1, dni);
-            pStmt.setInt(2, idLibro); // Esto ahora mapea correctamente a id_libro
+            pStmt.setInt(2, idLibro);
             pStmt.setString(3, tituloLibro);
             pStmt.setDate(4, new java.sql.Date(fechaSalida.getTime()));
             pStmt.setDate(5, new java.sql.Date(fechaDevolucion.getTime()));
@@ -28,18 +28,18 @@ public class PrestamoDAO {
         List<Prestamo> prestamos = new ArrayList<>();
         String sql = "SELECT p.id, p.id_libro, l.titulo, p.fecha_salida, p.fecha_devolucion " +
                 "FROM Prestamos p " +
-                "JOIN libros l ON p.id_libro = l.id " + // Asegúrate de que esta columna de unión sea correcta
+                "JOIN libros l ON p.id_libro = l.id " +
                 "WHERE p.dni_usuario = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, dniUsuario);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 prestamos.add(new Prestamo(
-                        rs.getInt("id"), // Este es el ID del préstamo (Prestamo)
+                        rs.getInt("id"),
                         rs.getDate("fecha_salida"),
                         rs.getDate("fecha_devolucion"),
-                        new Libro(rs.getInt("id_libro"), rs.getString("titulo")), // Usar id_libro aquí
-                        null // Asumiendo que la Persona (socio) no es necesaria aquí o se obtendrá por separado
+                        new Libro(rs.getInt("id_libro"), rs.getString("titulo")),
+                        null
                 ));
             }
             return prestamos;
